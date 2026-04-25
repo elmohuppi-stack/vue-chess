@@ -1,5 +1,9 @@
 <template>
-  <span class="piece select-none">{{ pieceSymbol }}</span>
+  <span
+    class="piece select-none text-6xl leading-none"
+    :class="piece.color === 'black' ? 'piece-black' : 'piece-white'"
+    >{{ pieceSymbol }}</span
+  >
 </template>
 
 <script setup lang="ts">
@@ -10,16 +14,20 @@ const props = defineProps<{
   piece: Piece;
 }>();
 
+// Chess symbols with best visual representation per piece type.
+// Officers (rook, knight, bishop, queen, king) use filled symbols (♜♞♝♛♚)
+// for bold appearance. Pawn uses the standard outlined symbol (♙) which
+// renders more cleanly on most systems.
 const pieceSymbols = {
-  pawn: { white: "♙", black: "♟" },
-  rook: { white: "♖", black: "♜" },
-  knight: { white: "♘", black: "♞" },
-  bishop: { white: "♗", black: "♝" },
-  queen: { white: "♕", black: "♛" },
-  king: { white: "♔", black: "♚" },
+  pawn: "♙",
+  rook: "♜",
+  knight: "♞",
+  bishop: "♝",
+  queen: "♛",
+  king: "♚",
 };
 
 const pieceSymbol = computed(() => {
-  return pieceSymbols[props.piece.type][props.piece.color];
+  return pieceSymbols[props.piece.type];
 });
 </script>
