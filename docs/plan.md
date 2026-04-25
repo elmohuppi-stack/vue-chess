@@ -6,6 +6,45 @@ Zusätzlich wird die Architektur von Anfang an so angelegt, dass die App später
 
 ---
 
+## Umsetzungsstatus
+
+### ✅ Phase 1a – Core (Domain + Engine) – **abgeschlossen**
+
+| Schritt | Status | Details |
+|---------|--------|---------|
+| **1. Projektgrundlage** | ✅ | Vite + Vue 3 + TypeScript + Tailwind + Pinia |
+| **2. Domänenmodell** | ✅ | `src/domain/types.ts` – Piece, Color, Square, Move, BoardState, PositionState, GameMetaState, GameStatus, MoveResult, HistoricalMove, GameContext |
+| **3. Spiellogik** | ✅ | `board.ts`, `gameState.ts`, `moveGenerator.ts`, `moveExecutor.ts`, `rules.ts` + `fen.ts` (FEN-Parsing/Serialisierung) + `notation.ts` (SAN-Notation) |
+| **4. Perft-Tests** | ✅ | `tests/domain/perft.test.ts` – 9 Tests (1 skipped), alle grün |
+| **5. Engine** | ✅ | `src/engine/evaluate.ts` – Minimax mit Alpha-Beta-Pruning, Piece-Square-Tables + Materialwerte |
+| **6. Engine-Smoke-Tests** | ✅ | `tests/engine/evaluate.test.ts` – 7 Tests, alle grün |
+
+### ✅ Phase 1b – UI (Vue + Integration) – **abgeschlossen**
+
+| Schritt | Status | Details |
+|---------|--------|---------|
+| **7. Game-Orchestrierung** | ✅ | `src/stores/gameStore.ts` – Pinia Store, reine Orchestrierung ohne Regellogik |
+| **8. Vue-Komponenten** | ✅ | `ChessBoard.vue`, `ChessPiece.vue`, `ChessSquare.vue`, `MoveList.vue`, `GamePanel.vue`, `ControlBar.vue` |
+| **9. Tailwind-Oberfläche** | ✅ | Warme Farbpalette, Board-Farben, Check-Indikator, Computer-Thinking-Anzeige, Mobile-first Layout |
+| **10. MVP vollständig** | ✅ | Neuer Zug, Reset, Seitenwahl, Statusanzeige, Zughistorie, Schwierigkeitsgrad |
+
+### 🔧 Gefixte Bugs während der Umsetzung
+
+1. `tailwind.css`: `user-select-none` entfernt (keine gültige Tailwind-Klasse)
+2. `evaluate.ts`: Falsche Imports (`./types` → `../domain/types` etc.)
+3. `gameStore.ts`: `createInitialPosition` aus falschem Modul importiert (war `types`, muss `gameState`)
+4. `ChessPiece.vue`: `defineProps` ohne Variablenzuweisung (`const props = defineProps<...>()`)
+5. `vite.config.ts`: `minify: "terser"` → `"esbuild"` (terser war nicht installiert)
+
+### Build-Ergebnis
+
+- Production Build: ✅ erfolgreich
+- 84 KB JS (gzipped: 32 KB)
+- 11 KB CSS (gzipped: 3 KB)
+- `make test`: 15 Tests grün, 1 skipped
+
+---
+
 ### Steps
 
 **Phase 1a – Core (Domain + Engine)**
