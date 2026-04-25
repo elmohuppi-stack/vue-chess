@@ -2,11 +2,11 @@
  * Simple chess engine - Minimax with Alpha-Beta pruning
  */
 
-import { PositionState, Color, Move } from "./types";
-import { generateAllMoves } from "./moveGenerator";
-import { applyMove } from "./moveExecutor";
-import { isInCheck, getLegalMoves } from "./rules";
-import { indexToCoord } from "./board";
+import { PositionState, Color, Move } from "../domain/types";
+import { generateAllMoves } from "../domain/moveGenerator";
+import { applyMove } from "../domain/moveExecutor";
+import { isInCheck, getLegalMoves } from "../domain/rules";
+import { indexToCoord } from "../domain/board";
 
 const PIECE_VALUES = {
   pawn: 1,

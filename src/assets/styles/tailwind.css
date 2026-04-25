@@ -31,6 +31,6 @@
   }
 
   .piece {
-    @apply select-none user-select-none;
+    @apply select-none;
   }
 }

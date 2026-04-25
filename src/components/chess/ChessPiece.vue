@@ -6,7 +6,7 @@
 import { computed } from "vue";
 import { Piece, Color } from "@/domain/types";
 
-defineProps<{
+const props = defineProps<{
   piece: Piece;
 }>();
 

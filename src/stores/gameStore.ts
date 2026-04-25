@@ -5,7 +5,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import {
-  createInitialPosition,
   PositionState,
   GameContext,
   GameStatus,
@@ -13,6 +12,7 @@ import {
   Color,
   HistoricalMove,
 } from "@/domain/types";
+import { createInitialPosition } from "@/domain/gameState";
 import { applyMove } from "@/domain/moveExecutor";
 import { getLegalMoves, getGameStatus, isInCheck } from "@/domain/rules";
 import { findBestMove } from "@/engine/evaluate";
